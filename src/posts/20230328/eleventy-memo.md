@@ -1,5 +1,5 @@
 ---
-title: Eleventyのメモ
+title: Eleventyのテーマ選定とyarnコマンドのエラー対応
 date: '2023-03-28'
 slug: 20230328-memo
 tags: [eleventy]
@@ -7,17 +7,14 @@ description: 今日調べたもの
 permalink: posts/{{ date }}-{{ slug }}/index.html
 ---
 
-{{ description }}
-
 ## EleventyのTheme
 
 前々から作りたかったEleventyのページを作成。
 
 テンプレートを色々調べて、以下のサイトから選んだ。
 
-[Eleventy Themes (31)](https://jamstackthemes.dev/ssg/eleventy/)
-
-[23 of the best Eleventy Themes (Starters) for 2023 | CloudCannon](https://cloudcannon.com/blog/23-of-the-best-eleventy-themes-for-2023/)
+- [Eleventy Themes (31)](https://jamstackthemes.dev/ssg/eleventy/)
+- [23 of the best Eleventy Themes (Starters) for 2023 | CloudCannon](https://cloudcannon.com/blog/23-of-the-best-eleventy-themes-for-2023/)
 
 結果的に以下のテンプレートを使用することにした。
 
@@ -31,14 +28,14 @@ permalink: posts/{{ date }}-{{ slug }}/index.html
 
 yarnコマンドを打ったら以下のエラーが出た。
 
-```command
-$ yarn
+```bash
+yarn
 nodenv: yarn: command not found
 ```
 
 原因的にはnodenvでnodeを管理している場合にyarnが入っていないらしいので、追加で入れることで対応。
 
-```command
+```bash
 sudo su -
 npm install --global yarn 
 ```
@@ -51,10 +48,12 @@ npm install --global yarn
 
 ログでエラー文言が消えちゃったのでどんなエラーが出たのか忘れちゃったんだが、残っている限りだとyarn dev時に以下のエラーが発生。
 
-```shell
+```bash
 error:03000086:digital envelope routines::initialization error
 ```
 
 以下のサイトを参考に対応。
 
 [Node.js 17以上にした際のOpenSSL互換エラー対応](https://zenn.dev/yogarasu/articles/425732ff408d06)
+
+確かに自分の環境はnodeは18になっていた。nodenv入っているので、.node-version追加して対応。
