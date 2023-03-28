@@ -24,7 +24,7 @@
     <meta property="og:title" content="{{  title or site.name | escape }}">
     <meta property="og:site_name" content="{{ site.name }}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="{{ site.url + page.url }}"/>
+    <meta property="og:url" content="{{ page.url | url | absoluteUrl(site.url) }}"/>
     <meta name="twitter:card" content="summary_large_image">
 
     {% if site.author.twitterHandle %}
