@@ -2,7 +2,7 @@
   "name": "Petit Memo",
   "description": "petit memo.",
   "url": "https://yatta47.github.io",
-  "pathPrefix": "/petit-memo/",
+  "pathPrefix": "/petit-memo",
   "author": {
     "name": "yatta47",
     "twitterHandle": "yatta47"

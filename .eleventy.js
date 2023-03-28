@@ -5,9 +5,10 @@ const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const htmlmin = require('html-minifier')
 const fs = require('fs');
 const path = require('path');
+const site = require('./src/data/site.json');
 
 const isDev = process.env.ELEVENTY_ENV === 'development';
-const isProd = process.env.ELEVENTY_ENV === 'production'
+const isProd = process.env.ELEVENTY_ENV === 'production';
 
 const manifestPath = path.resolve(
   __dirname,
@@ -16,12 +17,14 @@ const manifestPath = path.resolve(
   'manifest.json'
 );
 
-const manifest = isDev
-  ? {
-      'main.js': '/petit-memo/assets/main.js',
-      'main.css': '/petit-memo/assets/main.css',
-    }
-  : JSON.parse(fs.readFileSync(manifestPath, { encoding: 'utf8' }));
+// const manifest = isDev
+//   ? {
+//       'main.js': 'assets/main.js',
+//       'main.css': 'assets/main.css',
+//     }
+//   : JSON.parse(fs.readFileSync(manifestPath, { encoding: 'utf8' }));
+
+const manifest = JSON.parse(fs.readFileSync(manifestPath, { encoding: 'utf8' }));
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(readingTime);
@@ -43,13 +46,13 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addShortcode('bundledcss', function () {
     return manifest['main.css']
-      ? `<link href="${manifest['main.css']}" rel="stylesheet" />`
+      ? `<link href="${site.pathPrefix}${manifest['main.css']}" rel="stylesheet" />`
       : '';
   });
 
   eleventyConfig.addShortcode('bundledjs', function () {
     return manifest['main.js']
-      ? `<script src="${manifest['main.js']}"></script>`
+      ? `<script src="${site.pathPrefix}${manifest['main.js']}"></script>`
       : '';
   });
 
@@ -142,6 +145,6 @@ module.exports = function (eleventyConfig) {
     templateFormats: ['html', 'njk', 'md'],
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
-    pathPrefix: "/petit-memo/"
+    pathPrefix: site.pathPrefix
   };
 };
