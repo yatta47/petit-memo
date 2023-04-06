@@ -2,7 +2,7 @@
 title: Terraformのモジュールアップデートのベストプラクティス
 date: '2023-03-30'
 slug: terraform-module-update-best-practice
-tags: [chatgpt]
+tags: [terraform]
 description: Terraformのモジュールアップデートのベストプラクティス
 permalink: posts/{{ date }}-{{ slug }}/index.html
 ---
